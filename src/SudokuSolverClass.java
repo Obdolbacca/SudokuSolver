@@ -10,6 +10,34 @@ public class SudokuSolverClass extends JDialog {
     private JButton selFileBut;
     private int field[] = new int[81];
 
+    private boolean checkHLine (int lineNum) {
+
+        return true;
+    }
+
+    private boolean checkVLine (int lineNum) {
+
+        return true;
+    }
+
+    private boolean checkSquare (int squareNum) {
+
+        return true;
+    }
+
+    private boolean sudokuSolve () {
+        boolean isUnlucky;
+        int num = 1;
+        isUnlucky = checkHLine(num) & checkVLine(num) & checkSquare(num);
+        if (!isUnlucky) return false;
+
+        return true;
+    }
+
+    private void sudokuSolutionShow () {
+
+    }
+
     public SudokuSolverClass() {
         setContentPane(contentPane);
         setModal(true);
