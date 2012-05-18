@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class SudokuSolverClass extends JDialog {
     private JPanel contentPane;
@@ -51,8 +52,15 @@ public class SudokuSolverClass extends JDialog {
     }
 
     private void onOK() {
-// add your code here
-        dispose();
+        File inp = new File(textField1.getText());
+
+        try {
+
+        } catch (Exception e) {
+
+        } finally {
+
+        }
     }
 
     private void onCancel() {
