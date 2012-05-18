@@ -43,8 +43,8 @@ public class SudokuSolverClass extends JDialog {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 JFileChooser fc = new JFileChooser();
-                if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-
+                if (fc.showDialog(selFileBut, "") == JFileChooser.APPROVE_OPTION) {
+                    textField1.setText(fc.getSelectedFile().getAbsolutePath());
                 }
             }
         });
@@ -60,7 +60,7 @@ public class SudokuSolverClass extends JDialog {
         dispose();
     }
 
-    public static void sscMain(String[] args) {
+    public static void sscMain() {
         SudokuSolverClass dialog = new SudokuSolverClass();
         dialog.pack();
         dialog.setVisible(true);
