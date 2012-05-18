@@ -8,6 +8,7 @@ public class SudokuSolverClass extends JDialog {
     private JButton buttonCancel;
     private JTextField textField1;
     private JButton selFileBut;
+    private int field[] = new int[81];
 
     public SudokuSolverClass() {
         setContentPane(contentPane);
