@@ -5,6 +5,8 @@ public class SudokuSolverClass extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextField textField1;
+    private JButton selFileBut;
 
     public SudokuSolverClass() {
         setContentPane(contentPane);
@@ -37,6 +39,15 @@ public class SudokuSolverClass extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        selFileBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JFileChooser fc = new JFileChooser();
+                if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+                }
+            }
+        });
     }
 
     private void onOK() {
