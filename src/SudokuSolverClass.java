@@ -13,6 +13,15 @@ public class SudokuSolverClass extends JDialog {
     private JButton buttonCancel;
     private JTextField textField1;
     private JButton selFileBut;
+    private JTextArea textArea1;
+    private JTextArea textArea2;
+    private JTextArea textArea3;
+    private JTextArea textArea4;
+    private JTextArea textArea5;
+    private JTextArea textArea6;
+    private JTextArea textArea7;
+    private JTextArea textArea8;
+    private JTextArea textArea9;
     private int[] field = new int[81];
 
     private boolean checkHLine (int lineNum) {
@@ -128,6 +137,9 @@ public class SudokuSolverClass extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        this.setResizable(false);
+
         selFileBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -135,6 +147,7 @@ public class SudokuSolverClass extends JDialog {
                 fc.setFileFilter(new FileFilter() {
                     @Override
                     public boolean accept(File file) {
+                        if (file.isDirectory()) return true;
                         String[] filenameParts = file.getName().split("\\.");
                         if (filenameParts[filenameParts.length - 1].toLowerCase().equals("sud")) return true;
                         return false;
@@ -145,20 +158,22 @@ public class SudokuSolverClass extends JDialog {
                         return "Sudoku files";
                     }
                 });
+
                 if (fc.showDialog(selFileBut, "") == JFileChooser.APPROVE_OPTION) {
                     textField1.setText(fc.getSelectedFile().getAbsolutePath());
                 }
+                try{
+                    fillField();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(getRootPane(), "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                sudokuSolutionShow();
             }
         });
     }
 
     private void onOK() {
         if (!(textField1.getText().equals(""))) {
-            try{
-                fillField();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
-            }
             sudokuSolve();
             sudokuSolutionShow();
 
