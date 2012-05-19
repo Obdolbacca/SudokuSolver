@@ -3,7 +3,7 @@
   <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="637" height="490"/>
+      <xy x="48" y="54" width="677" height="490"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -49,7 +49,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="e3588" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="e3588" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -59,7 +59,7 @@
         <children>
           <component id="7c6c" class="javax.swing.JTextField" binding="textField1" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+              <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -69,7 +69,7 @@
           </component>
           <component id="df103" class="javax.swing.JButton" binding="selFileBut">
             <constraints>
-              <grid row="1" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="4" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="&amp;Select file"/>
@@ -77,14 +77,14 @@
           </component>
           <vspacer id="ac050">
             <constraints>
-              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <grid id="77556" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="290"/>
+                <minimum-size width="120" height="-1"/>
               </grid>
             </constraints>
             <properties/>
@@ -93,7 +93,7 @@
               <component id="64e98" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -103,7 +103,7 @@
               <component id="20a73" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -113,7 +113,7 @@
               <component id="53946" class="javax.swing.JTextArea" binding="textArea3" default-binding="true">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -123,7 +123,7 @@
               <component id="6301" class="javax.swing.JTextArea" binding="textArea4" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -133,7 +133,7 @@
               <component id="e554f" class="javax.swing.JTextArea" binding="textArea5" default-binding="true">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -143,7 +143,7 @@
               <component id="2aff5" class="javax.swing.JTextArea" binding="textArea6" default-binding="true">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -153,7 +153,7 @@
               <component id="d585f" class="javax.swing.JTextArea" binding="textArea7" default-binding="true">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -163,7 +163,7 @@
               <component id="24ab0" class="javax.swing.JTextArea" binding="textArea8" default-binding="true">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -173,7 +173,7 @@
               <component id="db518" class="javax.swing.JTextArea" binding="textArea9" default-binding="true">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
+                    <preferred-size width="50" height="45"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -182,6 +182,11 @@
               </component>
             </children>
           </grid>
+          <hspacer id="c97fd">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
         </children>
       </grid>
     </children>

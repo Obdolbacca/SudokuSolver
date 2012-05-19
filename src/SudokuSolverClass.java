@@ -1,3 +1,5 @@
+import com.sun.tools.javac.util.Convert;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.event.*;
@@ -27,6 +29,7 @@ public class SudokuSolverClass extends JDialog {
     private boolean checkHLine (int lineNum) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 9; i ++) {
+            if (field[lineNum * 9 + i] == 0) continue;
             if (lst.contains(field[lineNum * 9 + i])) {
                 return false;
             } else {
@@ -39,6 +42,7 @@ public class SudokuSolverClass extends JDialog {
     private boolean checkVLine (int lineNum) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 9; i ++) {
+            if (field[9 * i + lineNum] == 0) continue;
             if (lst.contains(field[9 * i + lineNum])) {
                 return false;
             } else {
@@ -52,6 +56,7 @@ public class SudokuSolverClass extends JDialog {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         int squareNum = getSquareByAbsPos(pos);
         for (int i = 0; i < 9; i ++) {
+            if (field[getAbsPosBySquare(squareNum, i)] == 0) continue;
             if (lst.contains(field[getAbsPosBySquare(squareNum, i)])) {
                 return false;
             } else {
@@ -79,16 +84,72 @@ public class SudokuSolverClass extends JDialog {
     }
 
     private boolean sudokuSolve () {
-        boolean isUnlucky;
+        boolean isLucky;
         int num = 1;
-        isUnlucky = checkHLine(num) & checkVLine(num) & checkSquare(num);
-        if (!isUnlucky) return false;
+        isLucky = checkHLine(num) & checkVLine(num) & checkSquare(num);
+        if (!isLucky) return false;
 
+        for (int i = 0; i < 81; i ++) {
+            if (field[i] == 0) return false;
+        }
         return true;
     }
 
     private void sudokuSolutionShow () {
-        StringBuilder sb = new StringBuilder();
+        ArrayList<ArrayList<Integer>> squares = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i < 9; i ++) {
+            squares.add(new ArrayList<Integer>());
+        }
+        for (int i = 0; i < 81; i ++) {
+            int squareNum = getSquareByAbsPos(i);
+            squares.get(squareNum).add(field[i]);
+        }
+        for (int i = 0; i < 9; i ++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < 9; j ++) {
+                if (j == 3 || j == 6) {
+                    sb.append('\n');
+                }
+                int val = squares.get(i).get(j);
+                sb.append(val == 0 ? "*" : val);
+                sb.append(' ');
+            }
+            if (i == 0) {
+                textArea1.setText(sb.toString());
+                continue;
+            }
+            if (i == 1) {
+                textArea2.setText(sb.toString());
+                continue;
+            }
+            if (i == 2) {
+                textArea3.setText(sb.toString());
+                continue;
+            }
+            if (i == 3) {
+                textArea4.setText(sb.toString());
+                continue;
+            }
+            if (i == 4) {
+                textArea5.setText(sb.toString());
+                continue;
+            }
+            if (i == 5) {
+                textArea6.setText(sb.toString());
+                continue;
+            }
+            if (i == 6) {
+                textArea7.setText(sb.toString());
+                continue;
+            }
+            if (i == 7) {
+                textArea8.setText(sb.toString());
+                continue;
+            }
+            if (i == 8) {
+                textArea9.setText(sb.toString());
+            }
+        }
     }
 
     private void fillField () throws IOException {
@@ -96,6 +157,19 @@ public class SudokuSolverClass extends JDialog {
         FileReader inpStream = null;
         try {
             inpStream = new FileReader(inp);
+            int i = 0;
+            int buf;
+            char[] tmp = new char[1];
+            while ((buf = inpStream.read()) >= 0) {
+                if (buf != '\n' && i < 81) {
+                    if (buf != '*') {
+                        tmp[0] = (char)buf;
+                        field[i ++] = Integer.parseInt(new String(tmp));
+                    } else {
+                        field[i ++] = 0;
+                    }
+                }
+            }
         } finally {
             if (inpStream != null) {
                 inpStream.close();
@@ -107,7 +181,7 @@ public class SudokuSolverClass extends JDialog {
     public SudokuSolverClass() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(selFileBut);
 
         buttonOK.addActionListener(new ActionListener() {
             @Override
@@ -168,6 +242,7 @@ public class SudokuSolverClass extends JDialog {
                     JOptionPane.showMessageDialog(getRootPane(), "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 sudokuSolutionShow();
+                getRootPane().setDefaultButton(buttonOK);
             }
         });
     }
