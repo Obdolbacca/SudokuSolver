@@ -288,9 +288,6 @@ public class SudokuSolverClass extends JDialog {
             int[] field2Tmp = fieldTmp.clone();
             field2Tmp[pos] = values.get(0);
             if (checkHLine(pos / 9, field2Tmp) && checkVLine(pos % 9, field2Tmp)) {
-                //for (int i = 0; i < 81; i += 3) {
-                    //if (!checkSquare(i, field2Tmp)) return false;
-                //}
                 System.arraycopy(field2Tmp, 0, field, 0, 81);
                 return true;
             } else {
