@@ -279,7 +279,7 @@ public class SudokuSolverClass extends JDialog {
     }
 
     @SuppressWarnings({"unchecked"})
-    private static synchronized <ArrayList> ArrayList smthToArLInt (Object obj) {
+    private static synchronized <ArrayList> ArrayList somethingToArLInt (Object obj) {
         return (ArrayList) obj;
     }
 
@@ -306,7 +306,7 @@ public class SudokuSolverClass extends JDialog {
             int[] field2Tmp = fieldTmp.clone();
             field2Tmp[pos] = values.get(iteration);
             ArrayList<Integer> ar2;
-            ar2 = smthToArLInt(values.clone());
+            ar2 = somethingToArLInt(values.clone());
             if (ar2 != null) ar2.remove(iteration);
             if (!checkHLine(pos / 9, field2Tmp) || !checkVLine(pos % 9, field2Tmp) || !checkSquare(pos, field2Tmp)) {
                 int currentValue = values.get(iteration);
