@@ -135,41 +135,44 @@ public class SudokuSolverClass extends JDialog {
                 sb.append(val == 0 ? "*" : val);
                 sb.append(' ');
             }
-            if (i == 0) {
-                textArea1.setText(sb.toString());
-                continue;
+            switch (i) {
+                case 0: {
+                    textArea1.setText(sb.toString());
+                    continue;
+                }
+                case 1: {
+                    textArea2.setText(sb.toString());
+                    continue;
+                }
+                case 2: {
+                    textArea3.setText(sb.toString());
+                    continue;
+                }
+                case 3: {
+                    textArea4.setText(sb.toString());
+                    continue;
+                }
+                case 4: {
+                    textArea5.setText(sb.toString());
+                    continue;
+                }
+                case 5: {
+                    textArea6.setText(sb.toString());
+                    continue;
+                }
+                case 6: {
+                    textArea7.setText(sb.toString());
+                    continue;
+                }
+                case 7: {
+                    textArea8.setText(sb.toString());
+                    continue;
+                }
+                case 8: {
+                    textArea9.setText(sb.toString());
+                }
             }
-            if (i == 1) {
-                textArea2.setText(sb.toString());
-                continue;
-            }
-            if (i == 2) {
-                textArea3.setText(sb.toString());
-                continue;
-            }
-            if (i == 3) {
-                textArea4.setText(sb.toString());
-                continue;
-            }
-            if (i == 4) {
-                textArea5.setText(sb.toString());
-                continue;
-            }
-            if (i == 5) {
-                textArea6.setText(sb.toString());
-                continue;
-            }
-            if (i == 6) {
-                textArea7.setText(sb.toString());
-                continue;
-            }
-            if (i == 7) {
-                textArea8.setText(sb.toString());
-                continue;
-            }
-            if (i == 8) {
-                textArea9.setText(sb.toString());
-            }
+
         }
     }
 
