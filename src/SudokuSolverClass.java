@@ -67,7 +67,7 @@ public class SudokuSolverClass extends JDialog {
     }
 
     private int getAbsPosBySquare (int squareNum, int pos) {
-        int retVal = 0;
+        int retVal;
         int auxY = ((squareNum / 3) * 3);
         int auxX = ((squareNum % 3) * 3);
         int position = (pos / 3) * 9 + (pos % 3);
@@ -76,7 +76,7 @@ public class SudokuSolverClass extends JDialog {
     }
 
     private int getSquareByAbsPos (int pos) {
-        int retVal = 0;
+        int retVal;
         int auxX = (pos % 9) / 3;
         int auxY = (pos / 9) / 3;
         retVal = auxY * 3 + auxX;
@@ -92,42 +92,31 @@ public class SudokuSolverClass extends JDialog {
         return fieldFilled(null);
     }
 
-    private ArrayList<Integer> initValues(int[] tmpField) {
+    private ArrayList<Integer> initValues() {
         ArrayList<Integer> retVal = new ArrayList<Integer>();
         for (int i = 0; i < 9; i ++) {
             for (int j = 0; j < 9; j ++) {
                 retVal.add(i+1);
             }
         }
-        if (tmpField == null) {
-            for (int i = 0; i < 81; i ++) {
-                if (field[i] == 0) continue;
-                if (!retVal.contains(field[i])) return null;
-                retVal.remove(retVal.indexOf(field[i]));
-            }
-        } else {
-            for (int i = 0; i < 81; i ++) {
-                if (tmpField[i] == 0) continue;
-                if (!retVal.contains(tmpField[i])) return null;
-                retVal.remove(retVal.indexOf(tmpField[i]));
-            }
+
+        for (int i = 0; i < 81; i ++) {
+            if (field[i] == 0) continue;
+            if (!retVal.contains(field[i])) return null;
+            retVal.remove(retVal.indexOf(field[i]));
         }
         return retVal;
     }
 
-    private boolean fieldFilled(int[] tmpField) {
-        if (tmpField == null) {
-            for (int i = 0; i < 81; i ++) {
-                if (field[i] == 0) return false;
-            }
-        } else {
-            for (int i = 0; i < 81; i ++) {
-                if (tmpField[i] == 0) return false;
-            }
+    private boolean fieldFilled() {
+
+        for (int i = 0; i < 81; i ++) {
+            if (field[i] == 0) return false;
         }
         return true;
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void sudokuSolutionShow () {
         ArrayList<ArrayList<Integer>> squares = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 9; i ++) {
@@ -256,8 +245,7 @@ public class SudokuSolverClass extends JDialog {
                     public boolean accept(File file) {
                         if (file.isDirectory()) return true;
                         String[] filenameParts = file.getName().split("\\.");
-                        if (filenameParts[filenameParts.length - 1].toLowerCase().equals("sud")) return true;
-                        return false;
+                        return filenameParts[filenameParts.length - 1].toLowerCase().equals("sud");
                     }
 
                     @Override
@@ -299,9 +287,7 @@ public class SudokuSolverClass extends JDialog {
                 //for (int i = 0; i < 81; i += 3) {
                     //if (!checkSquare(i, field2Tmp)) return false;
                 //}
-                for (int i = 0; i < 81; i ++) {
-                    field[i] = field2Tmp[i];
-                }
+                System.arraycopy(field2Tmp, 0, field, 0, 81);
                 return true;
             } else {
                 return false;
@@ -329,6 +315,7 @@ public class SudokuSolverClass extends JDialog {
             }
             boolean resolved = tryValues(pos + 1, ar2, 0, field2Tmp);
             if (resolved) return true;
+            //noinspection ConstantConditions
             if (!resolved) {
                 int currentValue = values.get(iteration);
                 int i = 1;
