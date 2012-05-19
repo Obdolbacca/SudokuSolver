@@ -26,41 +26,41 @@ public class SudokuSolverClass extends JDialog {
     private JTextArea textArea9;
     private final int[] field = new int[81];
 
-    private boolean checkHLine (int lineNum) {
+    private boolean checkHLine (int lineNum, int[] tmpField) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 9; i ++) {
-            if (field[lineNum * 9 + i] == 0) continue;
-            if (lst.contains(field[lineNum * 9 + i])) {
+            if (tmpField[lineNum * 9 + i] == 0) continue;
+            if (lst.contains(tmpField[lineNum * 9 + i])) {
                 return false;
             } else {
-                lst.add(field[lineNum * 9 + i]);
+                lst.add(tmpField[lineNum * 9 + i]);
             }
         }
         return true;
     }
 
-    private boolean checkVLine (int lineNum) {
+    private boolean checkVLine (int lineNum, int[] tmpField) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         for (int i = 0; i < 9; i ++) {
-            if (field[9 * i + lineNum] == 0) continue;
-            if (lst.contains(field[9 * i + lineNum])) {
+            if (tmpField[9 * i + lineNum] == 0) continue;
+            if (lst.contains(tmpField[9 * i + lineNum])) {
                 return false;
             } else {
-                lst.add(field[9 * i + lineNum]);
+                lst.add(tmpField[9 * i + lineNum]);
             }
         }
         return true;
     }
 
-    private boolean checkSquare (int pos) {
+    private boolean checkSquare (int pos, int[] tmpField) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
         int squareNum = getSquareByAbsPos(pos);
         for (int i = 0; i < 9; i ++) {
-            if (field[getAbsPosBySquare(squareNum, i)] == 0) continue;
-            if (lst.contains(field[getAbsPosBySquare(squareNum, i)])) {
+            if (tmpField[getAbsPosBySquare(squareNum, i)] == 0) continue;
+            if (lst.contains(tmpField[getAbsPosBySquare(squareNum, i)])) {
                 return false;
             } else {
-                lst.add(field[getAbsPosBySquare(squareNum, i)]);
+                lst.add(tmpField[getAbsPosBySquare(squareNum, i)]);
             }
         }
         return true;
@@ -84,17 +84,46 @@ public class SudokuSolverClass extends JDialog {
     }
 
     private boolean sudokuSolve () {
-        boolean isLucky;
-        int pos = 1;
-        int num = 1;
-        int current = 1;
+        int[] fieldTmp = field.clone();
+        ArrayList<Integer> al = initValues(null);
+        if (al == null) return false;
+        tryValues(0, al, 0, fieldTmp);
 
-        return fieldFilled();
+        return fieldFilled(null);
     }
 
-    private boolean fieldFilled() {
-        for (int i = 0; i < 81; i ++) {
-            if (field[i] == 0) return false;
+    private ArrayList<Integer> initValues(int[] tmpField) {
+        ArrayList<Integer> retVal = new ArrayList<Integer>();
+        for (int i = 0; i < 9; i ++) {
+            for (int j = 0; j < 9; j ++) {
+                retVal.add(i+1);
+            }
+        }
+        if (tmpField == null) {
+            for (int i = 0; i < 81; i ++) {
+                if (field[i] == 0) continue;
+                if (!retVal.contains(field[i])) return null;
+                retVal.remove(retVal.indexOf(field[i]));
+            }
+        } else {
+            for (int i = 0; i < 81; i ++) {
+                if (tmpField[i] == 0) continue;
+                if (!retVal.contains(tmpField[i])) return null;
+                retVal.remove(retVal.indexOf(tmpField[i]));
+            }
+        }
+        return retVal;
+    }
+
+    private boolean fieldFilled(int[] tmpField) {
+        if (tmpField == null) {
+            for (int i = 0; i < 81; i ++) {
+                if (field[i] == 0) return false;
+            }
+        } else {
+            for (int i = 0; i < 81; i ++) {
+                if (tmpField[i] == 0) return false;
+            }
         }
         return true;
     }
@@ -239,14 +268,15 @@ public class SudokuSolverClass extends JDialog {
 
                 if (fc.showDialog(selFileBut, "") == JFileChooser.APPROVE_OPTION) {
                     textField1.setText(fc.getSelectedFile().getAbsolutePath());
+
+                    try{
+                        fillField();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(getRootPane(), "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    sudokuSolutionShow();
+                    getRootPane().setDefaultButton(buttonOK);
                 }
-                try{
-                    fillField();
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(getRootPane(), "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                sudokuSolutionShow();
-                getRootPane().setDefaultButton(buttonOK);
             }
         });
     }
@@ -261,9 +291,56 @@ public class SudokuSolverClass extends JDialog {
         }
     }
 
-    private boolean tryLine (int lineNum, ArrayList<Integer> values, int iteration) {
-
-        return checkHLine(lineNum);
+    private boolean tryValues (int pos, ArrayList<Integer> values, int iteration, int[] fieldTmp) {
+        if (values.size() == 1) {
+            int[] field2Tmp = fieldTmp.clone();
+            field2Tmp[pos] = values.get(0);
+            if (checkHLine(pos / 9, field2Tmp) && checkVLine(pos % 9, field2Tmp)) {
+                //for (int i = 0; i < 81; i += 3) {
+                    //if (!checkSquare(i, field2Tmp)) return false;
+                //}
+                for (int i = 0; i < 81; i ++) {
+                    field[i] = field2Tmp[i];
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (iteration > values.size() - 1) {
+                return false;
+            }
+            if (field[pos] != 0) {
+                return tryValues(pos + 1, values, 0, fieldTmp);
+            }
+            int[] field2Tmp = fieldTmp.clone();
+            field2Tmp[pos] = values.get(iteration);
+            ArrayList<Integer> ar2 = (ArrayList<Integer>)values.clone();
+            ar2.remove(iteration);
+            if (!checkHLine(pos / 9, field2Tmp) || !checkVLine(pos % 9, field2Tmp) || !checkSquare(pos, field2Tmp)) {
+                int currentValue = values.get(iteration);
+                int i = 1;
+                while (!values.contains(currentValue + i) && (currentValue + i) < 10) {
+                    i ++;
+                }
+                if (currentValue + i > 9) return false;
+                int newIteration = values.indexOf(currentValue + i);
+                return tryValues(pos, values, newIteration, fieldTmp);
+            }
+            boolean resolved = tryValues(pos + 1, ar2, 0, field2Tmp);
+            if (resolved) return true;
+            if (!resolved) {
+                int currentValue = values.get(iteration);
+                int i = 1;
+                while (!values.contains(currentValue + i) && (currentValue + i) < 10) {
+                    i ++;
+                }
+                if (currentValue + i > 9) return false;
+                int newIteration = values.indexOf(currentValue + i);
+                return tryValues(pos, values, newIteration, fieldTmp);
+            }
+        }
+        return false;
     }
 
     private void onCancel() {
