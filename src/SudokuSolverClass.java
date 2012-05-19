@@ -174,7 +174,9 @@ public class SudokuSolverClass extends JDialog {
 
     private void onOK() {
         if (!(textField1.getText().equals(""))) {
-            sudokuSolve();
+            if (!sudokuSolve()) {
+                JOptionPane.showMessageDialog(getRootPane(), "Seems like this is not solvable...", "Can not solve", JOptionPane.WARNING_MESSAGE);
+            }
             sudokuSolutionShow();
 
         }
