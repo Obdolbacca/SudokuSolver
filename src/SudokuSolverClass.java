@@ -24,7 +24,7 @@ public class SudokuSolverClass extends JDialog {
     private JTextArea textArea7;
     private JTextArea textArea8;
     private JTextArea textArea9;
-    private int[] field = new int[81];
+    private final int[] field = new int[81];
 
     private boolean checkHLine (int lineNum) {
         ArrayList<Integer> lst = new ArrayList<Integer>();
@@ -85,10 +85,14 @@ public class SudokuSolverClass extends JDialog {
 
     private boolean sudokuSolve () {
         boolean isLucky;
+        int pos = 1;
         int num = 1;
-        isLucky = checkHLine(num) & checkVLine(num) & checkSquare(num);
-        if (!isLucky) return false;
+        int current = 1;
 
+        return fieldFilled();
+    }
+
+    private boolean fieldFilled() {
         for (int i = 0; i < 81; i ++) {
             if (field[i] == 0) return false;
         }
@@ -255,6 +259,11 @@ public class SudokuSolverClass extends JDialog {
             sudokuSolutionShow();
 
         }
+    }
+
+    private boolean tryLine (int lineNum, ArrayList<Integer> values, int iteration) {
+
+        return checkHLine(lineNum);
     }
 
     private void onCancel() {
