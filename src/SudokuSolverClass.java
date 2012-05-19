@@ -262,7 +262,7 @@ public class SudokuSolverClass extends JDialog {
                     try{
                         fillField();
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(getRootPane(), "Somewhat went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(getRootPane(), "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     sudokuSolutionShow();
                     getRootPane().setDefaultButton(buttonOK);
