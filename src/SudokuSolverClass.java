@@ -226,6 +226,7 @@ public class SudokuSolverClass extends JDialog {
 // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
@@ -233,6 +234,7 @@ public class SudokuSolverClass extends JDialog {
 
 // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
