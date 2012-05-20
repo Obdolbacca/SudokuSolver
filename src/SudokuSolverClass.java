@@ -178,6 +178,8 @@ public class SudokuSolverClass extends JDialog {
 
     private void fillField () throws IOException {
         File inp = new File(textField1.getText());
+        String[] fileNameParts = textField1.getText().split("\\.");
+        if (!fileNameParts[fileNameParts.length - 1].toLowerCase().equals("sud")) throw new IOException("Wrong file format!");
         FileReader inpStream = null;
         try {
             inpStream = new FileReader(inp);
@@ -185,7 +187,7 @@ public class SudokuSolverClass extends JDialog {
             int buf;
             char[] tmp = new char[1];
             while ((buf = inpStream.read()) >= 0) {
-                if (buf != '\n' && i < 81) {
+                if (buf != '\n' && buf != '\r' && i < 81) {
                     if (buf != '*') {
                         tmp[0] = (char)buf;
                         field[i ++] = Integer.parseInt(new String(tmp));
