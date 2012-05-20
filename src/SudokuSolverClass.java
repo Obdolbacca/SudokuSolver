@@ -256,7 +256,7 @@ public class SudokuSolverClass extends JDialog {
                     }
                 });
 
-                if (fc.showDialog(selFileBut, "") == JFileChooser.APPROVE_OPTION) {
+                if (fc.showDialog(selFileBut, "Open") == JFileChooser.APPROVE_OPTION) {
                     textField1.setText(fc.getSelectedFile().getAbsolutePath());
 
                     try{
