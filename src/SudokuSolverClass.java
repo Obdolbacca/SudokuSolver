@@ -85,10 +85,8 @@ public class SudokuSolverClass extends JDialog {
     private boolean sudokuSolve () {
         int[] fieldTmp = field.clone();
         ArrayList<Integer> al = initValues();
-        if (al == null) return false;
-        tryValues(0, al, 0, fieldTmp);
 
-        return fieldFilled();
+        return (al != null) && tryValues(0, al, 0, fieldTmp) && fieldFilled();
     }
 
     private ArrayList<Integer> initValues() {
